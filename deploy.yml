@@ -1,0 +1,15 @@
+- name: install docker
+  hosts: all_server
+  become: yes
+  roles:
+    - docker
+- name: Развертывание node exporet
+  hosts: all_server
+  become: yes
+  roles:
+    - node_exporter
+- name: Развертывание графиков мониторинга
+  hosts: monitoring_node
+  become: yes
+  roles:
+    - monitoring_stack

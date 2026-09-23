@@ -1,0 +1,35 @@
+  -  name: Обновление кэша пакетов apt
+     ansible.builtin.apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+  -  name: Установка зависимостей
+     ansible.builtin.apt:
+       package:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - gnupg
+          - lsb-release
+       state: present
+
+  -  name: Установка Docker
+     ansible.builtin.apt:
+       name: docker.io
+       state: present
+       update_cache: yes
+  -  name: Настройка зеркал Docker Hub для обхода блокировок
+     ansible.builtin.copy:
+       dest: /etc/docker/daemon.json
+       content: |
+        {
+          "registry-mirrors": [
+            "https://cr.yandex/mirror",
+            "https://docker.hub.timeweb.cloud"
+          ]
+        }
+       mode: '0644'
+  -  name: Перезапуск Docker для применения зеркал
+     ansible.builtin.systemd:
+       name: docker
+       state: restarted

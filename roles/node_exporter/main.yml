@@ -1,0 +1,7 @@
+- name: node_exporter
+  community.docker.docker_container:
+    name: node_exporter
+    image: prom/node-exporter:latest
+    restart_policy: unless-stopped
+    network_mode: host
+    pid_mode: host
