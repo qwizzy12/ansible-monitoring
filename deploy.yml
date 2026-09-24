@@ -1,15 +1,15 @@
-- name: install docker
+- name: Install docker
   hosts: all_server
-  become: yes
+  become: true
   roles:
     - docker
 - name: Развертывание node exporet
   hosts: all_server
-  become: yes
+  become: true
   roles:
     - node_exporter
 - name: Развертывание графиков мониторинга
   hosts: monitoring_node
-  become: yes
+  become: true
   roles:
     - monitoring_stack

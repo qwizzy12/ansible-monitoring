@@ -3,12 +3,12 @@
     path: /etc/prometheus/
     state: directory
     mode: "0777"
-- name: конвертирование файла
+- name: Конвертирование файла
   ansible.builtin.template:
     src: prometheus.yml.j2
     dest: /etc/prometheus/prometheus.yml
     mode: "0777"
-- name: создание контейнера
+- name: Создание контейнера
   community.docker.docker_container:
     name: prometheus
     image: prom/prometheus
