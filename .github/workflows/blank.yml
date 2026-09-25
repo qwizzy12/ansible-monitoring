@@ -22,7 +22,7 @@ jobs:
           
       - name: Install Ansible Docker collection
         run: ansible-galaxy collection install community.docker
-
+        
       - name: Install ansible-lint
         run: |
           python3 -m pip install --upgrade pip
@@ -30,3 +30,5 @@ jobs:
 
       - name: Run Ansible-lint
         run: ansible-lint deploy.yml
+        env:
+          ANSIBLE_COLLECTIONS_PATH: ~/.ansible/collections
